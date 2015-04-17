@@ -1,4 +1,6 @@
 require 'pi_piper'
+require 'uri'
+require 'net/http'
 
 def set_down_tag
 #  begin
@@ -6,6 +8,9 @@ def set_down_tag
 #  rescue Exception => e
 #    p e
 #  end
+  uri_parsed = URI.parse('http://192.168.100.100/attendance/arrive/3')
+  http = Net::HTTP.new(uri_parsed.host)
+  http.get(uri_parsed.path)
   `echo 6=0% > /dev/servoblaster`
 end
 
